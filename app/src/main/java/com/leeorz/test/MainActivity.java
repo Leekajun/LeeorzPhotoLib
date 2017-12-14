@@ -2,6 +2,7 @@ package com.leeorz.test;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -24,7 +25,7 @@ public class MainActivity extends BaseActivity implements OnDealImageListener {
 
 
         photoUtil = new PhotoUtil(getActivity());
-        photoUtil.setFreeCrop(true);
+//        photoUtil.setFreeCrop(true);
         photoUtil.setOnDealImageListener(this);
 
         ivImage = (ImageView) findViewById(R.id.ivImage);
@@ -53,6 +54,8 @@ public class MainActivity extends BaseActivity implements OnDealImageListener {
 
     @Override
     public void onDealSingleImageComplete(Photo photo) {
+
+        Log.e("----->",photo.getUrl());
         Picasso.with(getActivity())
                 .load("file://" + photo.getUrl())
                 .into(ivImage);
