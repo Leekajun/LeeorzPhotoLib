@@ -104,7 +104,7 @@ public class PhotoUtil {
                 if (onDealImageListener != null) {
 //                    imagePath = BitmapUtil.ratingImageAndSave(imagePath);
                     int[] arr = getImageWidthAndHeight(imagePath);
-                    onDealImageListener.onDealSingleImageComplete(getImage(imagePath, arr[0], arr[1]));
+                    onDealImageListener.onDealSingleImageComplete(getImage(getRealFilePath(imagePath), arr[0], arr[1]));
                 }
             }
         } else if (requestCode == ALBUM) {
@@ -125,7 +125,7 @@ public class PhotoUtil {
             if (onDealImageListener != null) {
                 imagePath = photos.get(0);
                 int[] arr = getImageWidthAndHeight(imagePath);
-                onDealImageListener.onDealSingleImageComplete(getImage(imagePath, arr[0], arr[1]));
+                onDealImageListener.onDealSingleImageComplete(getImage(getRealFilePath((imagePath)), arr[0], arr[1]));
             }
         } else if (photos.size() != 0) {
             if (onDealImageListener != null) {
