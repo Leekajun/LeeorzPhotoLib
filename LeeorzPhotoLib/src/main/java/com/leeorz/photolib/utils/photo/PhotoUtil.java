@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.leeorz.photolib.BuildConfig;
@@ -23,7 +24,7 @@ import java.util.List;
  * Created by 嘉俊 on 2015/10/9.
  */
 public class PhotoUtil {
-    private static final String FILE_PROVIDER = BuildConfig.APPLICATION_ID + ".fileprovider";
+    private static String FILE_PROVIDER = "";
     public static final int CAMERA = 10001;
     public static final int ALBUM = 10002;
     private boolean isCrop = false;
@@ -37,8 +38,9 @@ public class PhotoUtil {
     private int radioY = 1;
     private OnDealImageListener onDealImageListener;
 
-    public PhotoUtil(Activity activity) {
+    public PhotoUtil(Activity activity,String applicationId) {
         this.mActivity = activity;
+        this.FILE_PROVIDER = applicationId + ".fileprovider";
     }
 
     public void setIsCrop(boolean isCrop) {
@@ -125,7 +127,7 @@ public class PhotoUtil {
             if (onDealImageListener != null) {
                 imagePath = photos.get(0);
                 int[] arr = getImageWidthAndHeight(imagePath);
-                onDealImageListener.onDealSingleImageComplete(getImage(getRealFilePath((imagePath)), arr[0], arr[1]));
+                onDealImageListener.onDealSingleImageComplete(getImage(getRealFilePath(imagePath), arr[0], arr[1]));
             }
         } else if (photos.size() != 0) {
             if (onDealImageListener != null) {
