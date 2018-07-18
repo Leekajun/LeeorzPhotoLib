@@ -142,8 +142,6 @@ public class PhotoUtil {
     }
 
     private void beginCrop(String path) {
-
-//        File crop = new File(mActivity.getFilesDir(),path);
         File crop = new File(getRealFilePath(path));
         Uri source =  FileProvider.getUriForFile(mActivity,FILE_PROVIDER,crop);
 

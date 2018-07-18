@@ -26,6 +26,7 @@ public class MainActivity extends BaseActivity implements OnDealImageListener {
 
         photoUtil = new PhotoUtil(getActivity(),BuildConfig.APPLICATION_ID);
 //        photoUtil.setFreeCrop(true);
+        photoUtil.setIsCrop(true);
         photoUtil.setOnDealImageListener(this);
 
         ivImage = (ImageView) findViewById(R.id.ivImage);

@@ -376,7 +376,9 @@ public class CropImageActivity extends MonitoredActivity {
     }
 
     private void saveOutput(Bitmap croppedImage) {
+
         if (saveUri != null) {
+            Log.e(saveUri.getPath());
             OutputStream outputStream = null;
             try {
                 outputStream = getContentResolver().openOutputStream(saveUri);
