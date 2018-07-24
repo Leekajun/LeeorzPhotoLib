@@ -162,7 +162,7 @@ public class PhotoUtil {
         if (resultCode == mActivity.RESULT_OK && result != null) {
             if (onDealImageListener != null) {
                 Crop.getOutput(result).getPath();
-                BitmapUtil.ratingImageAndSave(getRealFilePath(imagePath));
+                BitmapUtil.ratingImageAndSave(getRealFilePath(outputImagePath));
                 int[] arr = getImageWidthAndHeight(outputImagePath);
                 onDealImageListener.onDealSingleImageComplete(getImage(outputImagePath, arr[0], arr[1]));
             }
