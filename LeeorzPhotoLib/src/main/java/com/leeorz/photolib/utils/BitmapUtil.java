@@ -2,7 +2,6 @@ package com.leeorz.photolib.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -20,13 +19,9 @@ import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -554,7 +549,7 @@ public class BitmapUtil {
         File file = new File(filepath);
         try {
             FileOutputStream fos = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 10, fos);
             fos.flush();
             fos.close();
         } catch (FileNotFoundException e) {

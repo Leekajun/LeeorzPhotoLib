@@ -9,13 +9,13 @@ import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.leeorz.photolib.BuildConfig;
 import com.leeorz.photolib.utils.BitmapUtil;
 import com.leeorz.photolib.widget.crop.Crop;
 import com.leeorz.photolib.widget.photopicker.PhotoPickerActivity;
 import com.leeorz.photolib.widget.photopicker.utils.PhotoPickerIntent;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,13 +32,17 @@ public class PhotoUtil {
     private Activity mActivity;
     private String imagePath = "";
     private boolean isSpecifyRadio = false;
+    private boolean isMaxWH = false;
     private String outputImagePath = "";
 
     private int radioX = 1;
     private int radioY = 1;
+
+    private int maxWidth = 500;
+    private int maxHeight = 500;
     private OnDealImageListener onDealImageListener;
 
-    public PhotoUtil(Activity activity,String applicationId) {
+    public PhotoUtil(Activity activity, String applicationId) {
         this.mActivity = activity;
         this.FILE_PROVIDER = applicationId + ".fileprovider";
     }
@@ -46,6 +50,14 @@ public class PhotoUtil {
     public void setIsCrop(boolean isCrop) {
         this.isCrop = isCrop;
         isSpecifyRadio = false;
+    }
+
+    public void setIsCrop(boolean isCrop,int maxWidth,int maxHeight){
+        this.isCrop = isCrop;
+        this.isMaxWH = true;
+        this.maxWidth = maxWidth;
+        this.maxHeight = maxHeight;
+
     }
 
     public void setFreeCrop(boolean freeCrop) {
@@ -104,7 +116,8 @@ public class PhotoUtil {
                 beginCrop(imagePath);
             } else {
                 if (onDealImageListener != null) {
-//                    imagePath = BitmapUtil.ratingImageAndSave(imagePath);
+                    imagePath = BitmapUtil.ratingImageAndSave(imagePath);
+                    Log.e("---->","onDealImageListener");
                     int[] arr = getImageWidthAndHeight(imagePath);
                     onDealImageListener.onDealSingleImageComplete(getImage(getRealFilePath(imagePath), arr[0], arr[1]));
                 }
@@ -142,10 +155,22 @@ public class PhotoUtil {
     }
 
     private void beginCrop(String path) {
+
+//        File crop = new File(mActivity.getFilesDir(),path);
         File crop = new File(getRealFilePath(path));
         Uri source =  FileProvider.getUriForFile(mActivity,FILE_PROVIDER,crop);
 
+        File outputPath = new File(mActivity.getFilesDir(), "images/");
+        if(!outputPath.exists()){
+            outputPath.mkdirs();
+        }
         File output = new File(mActivity.getFilesDir(), "images/" + System.currentTimeMillis()+ ".jpg");
+        Log.e("destination","destination:" + output.getPath());
+        try {
+            output.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         outputImagePath = output.getAbsolutePath();
         Uri destination = FileProvider.getUriForFile(mActivity,FILE_PROVIDER,output);
 
@@ -153,6 +178,8 @@ public class PhotoUtil {
             Crop.of(source, destination).start(mActivity);
         }else if(isSpecifyRadio){
             Crop.of(source, destination).withAspect(radioX,radioY).start(mActivity);
+        }else if(isMaxWH){
+            Crop.of(source, destination).withSpecifyWH(maxWidth,maxHeight).start(mActivity);
         }else{
             Crop.of(source, destination).asSquare().start(mActivity);
         }
@@ -162,7 +189,7 @@ public class PhotoUtil {
         if (resultCode == mActivity.RESULT_OK && result != null) {
             if (onDealImageListener != null) {
                 Crop.getOutput(result).getPath();
-                BitmapUtil.ratingImageAndSave(getRealFilePath(outputImagePath));
+//                BitmapUtil.ratingImageAndSave(getRealFilePath(outputImagePath));
                 int[] arr = getImageWidthAndHeight(outputImagePath);
                 onDealImageListener.onDealSingleImageComplete(getImage(outputImagePath, arr[0], arr[1]));
             }
@@ -229,7 +256,7 @@ public class PhotoUtil {
     private int[] getImageWidthAndHeight(String imagePath) {
 
         imagePath = getRealFilePath(imagePath);
-//        Log.e("getImageWidthAndHeight","imagePath:" + imagePath);
+        Log.e("getImageWidthAndHeight","imagePath:" + imagePath);
 
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inJustDecodeBounds = true;
@@ -256,7 +283,7 @@ public class PhotoUtil {
                 path = file.getAbsolutePath();
             }
         }
-
+        Log.e("getRealFilePath","getRealFilePath:" + path);
         return path;
     }
 }

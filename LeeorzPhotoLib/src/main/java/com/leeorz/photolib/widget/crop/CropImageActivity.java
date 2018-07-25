@@ -376,14 +376,12 @@ public class CropImageActivity extends MonitoredActivity {
     }
 
     private void saveOutput(Bitmap croppedImage) {
-
         if (saveUri != null) {
-            Log.e(saveUri.getPath());
             OutputStream outputStream = null;
             try {
                 outputStream = getContentResolver().openOutputStream(saveUri);
                 if (outputStream != null) {
-                    croppedImage.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
+                    croppedImage.compress(Bitmap.CompressFormat.PNG, 90, outputStream);
                 }
             } catch (IOException e) {
                 setResultException(e);
@@ -429,6 +427,7 @@ public class CropImageActivity extends MonitoredActivity {
     }
 
     private void setResultUri(Uri uri) {
+        Log.e("RESULT_OK");
         setResult(RESULT_OK, new Intent().putExtra(MediaStore.EXTRA_OUTPUT, uri));
     }
 

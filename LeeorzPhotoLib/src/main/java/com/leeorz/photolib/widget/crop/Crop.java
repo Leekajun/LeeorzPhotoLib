@@ -82,6 +82,14 @@ public class Crop {
         return this;
     }
 
+    public Crop withSpecifyWH(int width, int height){
+        cropIntent.putExtra(Extra.MAX_X, width);
+        cropIntent.putExtra(Extra.MAX_Y, height);
+        cropIntent.putExtra(Extra.ASPECT_X, 1);
+        cropIntent.putExtra(Extra.ASPECT_Y, 1);
+        return this;
+    }
+
     /**
      * Send the crop Intent from an Activity
      *
