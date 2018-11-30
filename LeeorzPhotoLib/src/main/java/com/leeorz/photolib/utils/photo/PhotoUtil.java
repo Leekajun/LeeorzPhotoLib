@@ -31,12 +31,10 @@ public class PhotoUtil {
     private boolean isFreeCrop = false;
     private Activity mActivity;
     private String imagePath = "";
-    private boolean isSpecifyRadio = false;
-    private boolean isMaxWH = false;
     private String outputImagePath = "";
 
-    private int radioX = 1;
-    private int radioY = 1;
+    private int aspectX = 1;
+    private int aspectY = 1;
 
     private int maxWidth = 500;
     private int maxHeight = 500;
@@ -47,30 +45,27 @@ public class PhotoUtil {
         this.FILE_PROVIDER = applicationId + ".fileprovider";
     }
 
-    public void setIsCrop(boolean isCrop) {
+    public PhotoUtil setCrop(boolean isCrop) {
         this.isCrop = isCrop;
-        isSpecifyRadio = false;
+        return this;
     }
 
-    public void setIsCrop(boolean isCrop,int maxWidth,int maxHeight){
-        this.isCrop = isCrop;
-        this.isMaxWH = true;
+    public PhotoUtil setFreeCrop(boolean freeCrop) {
+        this.isFreeCrop = freeCrop;
+        this.isCrop = freeCrop;
+        return this;
+    }
+
+    public PhotoUtil setMaxSize(int maxWidth, int maxHeight){
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
-
+        return this;
     }
 
-    public void setFreeCrop(boolean freeCrop) {
-        isFreeCrop = freeCrop;
-        isCrop = freeCrop;
-        isSpecifyRadio = false;
-    }
-
-    public void setCropImageRadio(int x,int y) {
-        radioX = x;
-        radioY = y;
-        isSpecifyRadio = true;
-        isCrop = true;
+    public PhotoUtil setCropAspect(int aspectX, int aspectY) {
+        this.aspectX = aspectX;
+        this.aspectY = aspectY;
+        return this;
     }
 
     /**
@@ -117,7 +112,6 @@ public class PhotoUtil {
             } else {
                 if (onDealImageListener != null) {
                     imagePath = BitmapUtil.ratingImageAndSave(imagePath);
-                    Log.e("---->","onDealImageListener");
                     int[] arr = getImageWidthAndHeight(imagePath);
                     onDealImageListener.onDealSingleImageComplete(getImage(getRealFilePath(imagePath), arr[0], arr[1]));
                 }
@@ -157,8 +151,8 @@ public class PhotoUtil {
     private void beginCrop(String path) {
 
 //        File crop = new File(mActivity.getFilesDir(),path);
-        File crop = new File(getRealFilePath(path));
-        Uri source =  FileProvider.getUriForFile(mActivity,FILE_PROVIDER,crop);
+        File file = new File(getRealFilePath(path));
+        Uri source =  FileProvider.getUriForFile(mActivity,FILE_PROVIDER,file);
 
         File outputPath = new File(mActivity.getFilesDir(), "images/");
         if(!outputPath.exists()){
@@ -174,15 +168,12 @@ public class PhotoUtil {
         outputImagePath = output.getAbsolutePath();
         Uri destination = FileProvider.getUriForFile(mActivity,FILE_PROVIDER,output);
 
-        if(isFreeCrop){
-            Crop.of(source, destination).start(mActivity);
-        }else if(isSpecifyRadio){
-            Crop.of(source, destination).withAspect(radioX,radioY).start(mActivity);
-        }else if(isMaxWH){
-            Crop.of(source, destination).withSpecifyWH(maxWidth,maxHeight).start(mActivity);
-        }else{
-            Crop.of(source, destination).asSquare().start(mActivity);
+        Crop crop = Crop.of(source, destination);
+        crop.withMaxSize(maxWidth, maxHeight);
+        if(!isFreeCrop){
+            crop.withAspect(aspectX,aspectY);
         }
+        crop.start(mActivity);
     }
 
     private void handleCrop(int resultCode, Intent result) {
