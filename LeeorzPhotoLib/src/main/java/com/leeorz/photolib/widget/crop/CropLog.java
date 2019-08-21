@@ -1,6 +1,6 @@
 package com.leeorz.photolib.widget.crop;
 
-class Log {
+class CropLog {
 
     private static final String TAG = "android-crop";
 
