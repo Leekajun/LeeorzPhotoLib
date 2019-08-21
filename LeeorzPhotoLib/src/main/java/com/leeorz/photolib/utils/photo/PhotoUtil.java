@@ -40,7 +40,7 @@ public class PhotoUtil {
     private int maxHeight = 500;
     private OnDealImageListener onDealImageListener;
 
-    public PhotoUtil(Activity activity, String applicationId) {
+    public PhotoUtil(Activity activity,String applicationId) {
         this.mActivity = activity;
         this.FILE_PROVIDER = applicationId + ".fileprovider";
     }
@@ -56,13 +56,13 @@ public class PhotoUtil {
         return this;
     }
 
-    public PhotoUtil setMaxSize(int maxWidth, int maxHeight){
+    public PhotoUtil setMaxSize(int maxWidth,int maxHeight){
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
         return this;
     }
 
-    public PhotoUtil setCropAspect(int aspectX, int aspectY) {
+    public PhotoUtil setCropAspect(int aspectX,int aspectY) {
         this.aspectX = aspectX;
         this.aspectY = aspectY;
         return this;

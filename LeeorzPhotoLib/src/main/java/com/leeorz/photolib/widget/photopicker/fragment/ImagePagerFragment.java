@@ -104,7 +104,6 @@ public class ImagePagerFragment extends Fragment {
       String[] pathArr = bundle.getStringArray(ARG_PATH);
       paths.clear();
       if (pathArr != null) {
-
         paths = new ArrayList<>(Arrays.asList(pathArr));
       }
 

@@ -140,10 +140,10 @@ public class CropImageActivity extends MonitoredActivity {
                 option.inSampleSize = sampleSize;
                 rotateBitmap = new RotateBitmap(BitmapFactory.decodeStream(is, null, option), exifRotation);
             } catch (IOException e) {
-                Log.e("Error reading image: " + e.getMessage(), e);
+                CropLog.e("Error reading image: " + e.getMessage(), e);
                 setResultException(e);
             } catch (OutOfMemoryError e) {
-                Log.e("OOM reading image: " + e.getMessage(), e);
+                CropLog.e("OOM reading image: " + e.getMessage(), e);
                 setResultException(e);
             } finally {
                 CropUtil.closeSilently(is);
@@ -356,10 +356,10 @@ public class CropImageActivity extends MonitoredActivity {
             }
 
         } catch (IOException e) {
-            Log.e("Error cropping image: " + e.getMessage(), e);
+            CropLog.e("Error cropping image: " + e.getMessage(), e);
             setResultException(e);
         } catch (OutOfMemoryError e) {
-            Log.e("OOM cropping image: " + e.getMessage(), e);
+            CropLog.e("OOM cropping image: " + e.getMessage(), e);
             setResultException(e);
         } finally {
             CropUtil.closeSilently(is);
@@ -385,7 +385,7 @@ public class CropImageActivity extends MonitoredActivity {
                 }
             } catch (IOException e) {
                 setResultException(e);
-                Log.e("Cannot open file: " + saveUri, e);
+                CropLog.e("Cannot open file: " + saveUri, e);
             } finally {
                 CropUtil.closeSilently(outputStream);
             }
@@ -427,7 +427,6 @@ public class CropImageActivity extends MonitoredActivity {
     }
 
     private void setResultUri(Uri uri) {
-        Log.e("RESULT_OK");
         setResult(RESULT_OK, new Intent().putExtra(MediaStore.EXTRA_OUTPUT, uri));
     }
 

@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.leeorz.photolib.R;
 import com.leeorz.photolib.widget.photopicker.fragment.ImagePagerFragment;
 
@@ -32,8 +33,8 @@ public class PhotoPagerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_photo_pager);
+        ImmersionBar.with(this).barColor(R.color.colorPrimary).init();
 
         int currentItem = getIntent().getIntExtra(EXTRA_CURRENT_ITEM, 0);
         List<String> paths = getIntent().getStringArrayListExtra(EXTRA_PHOTOS);

@@ -2,16 +2,16 @@ package com.leeorz.photolib.widget.photopicker.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.leeorz.photolib.R;
 import com.leeorz.photolib.widget.photopicker.widget.TouchImageView;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,18 +37,19 @@ public class PhotoPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
 
         View itemView = mLayoutInflater.inflate(R.layout.item_pager, container, false);
-
-        TouchImageView imageView = (TouchImageView) itemView.findViewById(R.id.iv_pager);
         String path = paths.get(position);
-        final Uri uri;
-        if (path.startsWith("http")) {
+        Uri uri;
+        if(path.startsWith("http")){
             uri = Uri.parse(path);
-        } else {
+        }else{
             uri = Uri.fromFile(new File(path));
         }
-        Picasso.with(mContext)
+
+        TouchImageView imageView = (TouchImageView) itemView.findViewById(R.id.iv_pager);
+        Glide.with(mContext)
                 .load(uri)
-                .config(Bitmap.Config.RGB_565)
+                .fitCenter()
+                .placeholder(R.drawable.shape_photo_bg)
                 .error(R.drawable.ic_broken_image)
                 .into(imageView);
 
@@ -56,11 +57,9 @@ public class PhotoPagerAdapter extends PagerAdapter {
             @Override
             public void onClick(View view) {
                 try {
-//                    if (mContext instanceof ImagePagerFragment.AddImagePagerFragment) {
                     if (!((Activity) mContext).isFinishing()) {
                         ((Activity) mContext).onBackPressed();
                     }
-//                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

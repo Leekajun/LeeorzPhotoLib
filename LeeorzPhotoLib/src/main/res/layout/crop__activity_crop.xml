@@ -12,7 +12,5 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@android:color/black" />
-    <include
-        android:id="@+id/done_cancel_bar"
-        layout="@layout/crop__layout_done_cancel" />
+    <include layout="@layout/crop__layout_done_cancel" />
 </LinearLayout>

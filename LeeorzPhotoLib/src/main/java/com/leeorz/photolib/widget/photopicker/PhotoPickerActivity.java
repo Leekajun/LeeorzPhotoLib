@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.leeorz.photolib.R;
 import com.leeorz.photolib.widget.photopicker.entity.Photo;
 import com.leeorz.photolib.widget.photopicker.event.OnItemCheckListener;
@@ -42,7 +43,7 @@ public class PhotoPickerActivity extends AppCompatActivity implements ImagePager
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
+    ImmersionBar.with(this).barColor(R.color.colorPrimary).init();
     setContentView(R.layout.activity_photo_picker);
 
     Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -69,7 +69,9 @@ public abstract class SelectableAdapter<VH extends RecyclerView.ViewHolder>
 
 
   public void setCurrentDirectoryIndex(int currentDirectoryIndex) {
-    this.currentDirectoryIndex = currentDirectoryIndex;
+    if(currentDirectoryIndex < photoDirectories.size()){
+      this.currentDirectoryIndex = currentDirectoryIndex;
+    }
   }
 
 
@@ -79,7 +81,7 @@ public abstract class SelectableAdapter<VH extends RecyclerView.ViewHolder>
 
 
   public List<String> getCurrentPhotoPaths() {
-    List<String> currentPhotoPaths = new ArrayList<>(getCurrentPhotos().size());
+    List<String> currentPhotoPaths = new ArrayList<>();
     for (Photo photo : getCurrentPhotos()) {
       currentPhotoPaths.add(photo.getPath());
     }

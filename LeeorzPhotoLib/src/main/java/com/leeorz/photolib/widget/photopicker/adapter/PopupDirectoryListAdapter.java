@@ -9,9 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.leeorz.photolib.R;
 import com.leeorz.photolib.widget.photopicker.entity.PhotoDirectory;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -79,17 +79,17 @@ public class PopupDirectoryListAdapter extends BaseAdapter {
     }
 
     public void bindData(PhotoDirectory directory) {
-//      ImageLoader.getInstance().displayImage("file://" + directory.getCoverPath(), ivCover);
+
       Uri uri;
       if(directory.getCoverPath().startsWith("http")){
         uri = Uri.parse(directory.getCoverPath());
       }else{
         uri = Uri.fromFile(new File(directory.getCoverPath()));
       }
-      Picasso.with(context)
+      Glide.with(context)
               .load(uri)
               .centerCrop()
-              .resize(300,300)
+              .thumbnail(0.3f)
               .into(ivCover);
       tvName.setText(directory.getName());
     }

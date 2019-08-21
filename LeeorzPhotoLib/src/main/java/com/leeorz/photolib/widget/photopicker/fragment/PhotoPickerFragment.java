@@ -50,7 +50,6 @@ public class PhotoPickerFragment extends Fragment {
 
     captureManager = new ImageCaptureManager(getActivity());
 
-
     MediaStoreHelper.getPhotoDirs(getActivity(),
             new MediaStoreHelper.PhotosResultCallback() {
               @Override
@@ -70,6 +69,7 @@ public class PhotoPickerFragment extends Fragment {
     setRetainInstance(true);
 
     final View rootView = inflater.inflate(R.layout.fragment_photo_picker, container, false);
+
 
     photoGridAdapter = new PhotoGridAdapter(getActivity(), directories);
     listAdapter  = new PopupDirectoryListAdapter(getActivity(), directories);

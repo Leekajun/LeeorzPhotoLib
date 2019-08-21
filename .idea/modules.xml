@@ -4,7 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/LeeorzPhotoLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/LeeorzPhotoLib/LeeorzPhotoLib-LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/LeeorzPhotoLib/LeeorzPhotoLib-LeeorzPhotoLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LeeorzPhotoLib/LeeorzPhotoLib-LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/LeeorzPhotoLib/LeeorzPhotoLib-LeeorzPhotoLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/git-LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/git-LeeorzPhotoLib.iml" />
     </modules>
   </component>
 </project>

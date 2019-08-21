@@ -8,13 +8,13 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.leeorz.photolib.R;
 import com.leeorz.photolib.widget.photopicker.entity.Photo;
 import com.leeorz.photolib.widget.photopicker.entity.PhotoDirectory;
 import com.leeorz.photolib.widget.photopicker.event.OnItemCheckListener;
 import com.leeorz.photolib.widget.photopicker.event.OnPhotoClickListener;
 import com.leeorz.photolib.widget.photopicker.utils.MediaStoreHelper;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -88,17 +88,15 @@ public class PhotoGridAdapter extends SelectableAdapter<PhotoGridAdapter.PhotoVi
 //      DisplayImageOptions options = new DisplayImageOptions.Builder().cacheInMemory(true).imageScaleType(ImageScaleType.EXACTLY_STRETCHED).bitmapConfig(Bitmap.Config.RGB_565).showImageOnFail(R.drawable.ic_broken_image_black_48dp).build();
 //      ImageLoader.getInstance().displayImage("file://" + photo.getPath(), holder.ivPhoto, options);
 
-            if(holder.ivPhoto.getTag() != photo.getPath()){
-                Picasso.with(mContext)
-                        .load(new File(photo.getPath()))
-                        .centerCrop()
-                        .placeholder(R.drawable.shape_photo_bg)
-                        .error(R.drawable.ic_broken_image)
-                        .resize(300,300)
-                        .into(holder.ivPhoto);
-            }
+            Glide.with(mContext)
+                    .load(new File(photo.getPath()))
+                    .centerCrop()
+                    .placeholder(R.drawable.shape_photo_bg)
+                    .error(R.drawable.ic_broken_image)
+                    .thumbnail(0.2f)
+                    .into(holder.ivPhoto);
 
-            holder.ivPhoto.setTag(photo.getPath());
+
 
             final boolean isChecked = isSelected(photo);
 
