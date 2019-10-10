@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
@@ -31,35 +33,33 @@ public class PhotoPickerActivity extends AppCompatActivity implements ImagePager
   public final static String EXTRA_SHOW_CAMERA   = "SHOW_CAMERA";
   public final static String KEY_SELECTED_PHOTOS = "SELECTED_PHOTOS";
 
-  private MenuItem menuDoneItem;
 
   public final static int DEFAULT_MAX_COUNT = 9;
-
   private int maxCount = DEFAULT_MAX_COUNT;
-
-  /** to prevent multiple calls to inflate menu */
-  private boolean menuIsInflated = false;
+  private TextView tvDone;
 
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    ImmersionBar.with(this).barColor(R.color.colorPrimary).init();
+    ImmersionBar.with(this).barColor(R.color.header_background).init();
     setContentView(R.layout.activity_photo_picker);
-
-    Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-    mToolbar.setTitle(R.string.images);
-    setSupportActionBar(mToolbar);
-
-    ActionBar actionBar = getSupportActionBar();
-
-    actionBar.setDisplayHomeAsUpEnabled(true);
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      actionBar.setElevation(25);
-    }
 
     maxCount = getIntent().getIntExtra(EXTRA_MAX_COUNT, DEFAULT_MAX_COUNT);
     boolean showCamera = getIntent().getBooleanExtra(EXTRA_SHOW_CAMERA, true);
+    tvDone = findViewById(R.id.tvDone);
+    tvDone.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        clickDone();
+      }
+    });
+
+    findViewById(R.id.ivClose).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        finish();
+      }
+    });
 
     pickerFragment = (PhotoPickerFragment) getSupportFragmentManager().findFragmentById(R.id.photoPickerFragment);
     pickerFragment.getPhotoGridAdapter().setShowCamera(showCamera);
@@ -68,7 +68,7 @@ public class PhotoPickerActivity extends AppCompatActivity implements ImagePager
 
         int total = selectedItemCount + (isCheck ? -1 : 1);
 
-        menuDoneItem.setEnabled(total > 0);
+        tvDone.setEnabled(total > 0);
 
         if (maxCount <= 1) {
           List<Photo> photos = pickerFragment.getPhotoGridAdapter().getSelectedPhotos();
@@ -84,7 +84,7 @@ public class PhotoPickerActivity extends AppCompatActivity implements ImagePager
               LENGTH_LONG).show();
           return false;
         }
-        menuDoneItem.setTitle(getString(R.string.done_with_count, total, maxCount));
+        tvDone.setText(getString(R.string.done_with_count, total, maxCount));
         return true;
       }
     });
@@ -101,6 +101,8 @@ public class PhotoPickerActivity extends AppCompatActivity implements ImagePager
         public void run() {
           if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
+
+            setDoneEnable(pickerFragment.getPhotoGridAdapter().getSelectedPhotos().size() > 0);
           }
         }
       });
@@ -118,19 +120,12 @@ public class PhotoPickerActivity extends AppCompatActivity implements ImagePager
         .replace(R.id.container, this.imagePagerFragment)
         .addToBackStack(null)
         .commit();
+        setDoneEnable(true);
   }
 
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
-    if (!menuIsInflated) {
-      getMenuInflater().inflate(R.menu.menu_picker, menu);
-      menuDoneItem = menu.findItem(R.id.done);
-      menuDoneItem.setEnabled(false);
-      menuIsInflated = true;
-      return true;
-    }
-    return false;
+  private void setDoneEnable(boolean isEnable){
+      tvDone.setEnabled(isEnable);
   }
-
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
@@ -138,17 +133,23 @@ public class PhotoPickerActivity extends AppCompatActivity implements ImagePager
       super.onBackPressed();
       return true;
     }
-
-    if (item.getItemId() == R.id.done) {
-      Intent intent = new Intent();
-      ArrayList<String> selectedPhotos = pickerFragment.getPhotoGridAdapter().getSelectedPhotoPaths();
-      intent.putStringArrayListExtra(KEY_SELECTED_PHOTOS, selectedPhotos);
-      setResult(RESULT_OK, intent);
-      finish();
-      return true;
-    }
-
     return super.onOptionsItemSelected(item);
+  }
+
+  /**
+   * 点击done按钮
+   */
+  private void clickDone(){
+    Intent intent = new Intent();
+    ArrayList<String> selectedPhotos = pickerFragment.getPhotoGridAdapter().getSelectedPhotoPaths();
+
+    //获取当前的预览图中的图像并且关闭页面，将数据带回上一个页面
+    if(selectedPhotos.isEmpty()){
+      selectedPhotos.add(this.imagePagerFragment.getPaths().get(this.imagePagerFragment.getCurrentItem()));
+    }
+    intent.putStringArrayListExtra(KEY_SELECTED_PHOTOS, selectedPhotos);
+    setResult(RESULT_OK, intent);
+    finish();
   }
 
   public PhotoPickerActivity getActivity() {

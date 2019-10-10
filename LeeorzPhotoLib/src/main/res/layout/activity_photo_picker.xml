@@ -6,7 +6,8 @@
     android:fitsSystemWindows="true"
     tools:context="${relativePackage}.${activityClass}">
 
-  <include layout="@layout/toolbar" />
+    <include layout="@layout/include_picker_header"/>
+
 
   <FrameLayout
       android:id="@+id/container"

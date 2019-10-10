@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -56,7 +55,6 @@ public class PhotoGridAdapter extends SelectableAdapter<PhotoGridAdapter.PhotoVi
         View itemView = inflater.inflate(R.layout.item_photo, parent, false);
         PhotoViewHolder holder = new PhotoViewHolder(itemView);
         if (viewType == ITEM_TYPE_CAMERA) {
-            holder.rlSelected.setVisibility(View.GONE);
             holder.ivPhoto.setScaleType(ImageView.ScaleType.CENTER);
             holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -89,20 +87,19 @@ public class PhotoGridAdapter extends SelectableAdapter<PhotoGridAdapter.PhotoVi
 //      ImageLoader.getInstance().displayImage("file://" + photo.getPath(), holder.ivPhoto, options);
 
             Glide.with(mContext)
-                    .load(new File(photo.getPath()))
-                    .centerCrop()
-                    .placeholder(R.drawable.shape_photo_bg)
-                    .error(R.drawable.ic_broken_image)
-                    .thumbnail(0.2f)
-                    .into(holder.ivPhoto);
-
-
+                .load(new File(photo.getPath()))
+                .centerCrop()
+                .placeholder(R.drawable.shape_photo_bg)
+                .error(R.drawable.ic_broken_image)
+                .thumbnail(0.2f)
+                .into(holder.ivPhoto);
 
             final boolean isChecked = isSelected(photo);
 
-            holder.vSelected.setSelected(isChecked);
+            holder.mask.setVisibility(isChecked?View.VISIBLE:View.GONE);
             holder.ivPhoto.setSelected(isChecked);
-            holder.cbSelected.setChecked(isChecked);
+
+            holder.ivSelected.setImageResource(isChecked?R.drawable.ic_picker_checked:R.drawable.ic_picker_check);
 
             holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -112,12 +109,10 @@ public class PhotoGridAdapter extends SelectableAdapter<PhotoGridAdapter.PhotoVi
                     }
                 }
             });
-            holder.vSelected.setOnClickListener(new View.OnClickListener() {
+            holder.ivSelected.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
                     boolean isEnable = true;
-
                     if (onItemCheckListener != null) {
                         isEnable = onItemCheckListener.OnItemCheck(position, photo, isChecked,
                                 getSelectedPhotos().size());
@@ -148,16 +143,14 @@ public class PhotoGridAdapter extends SelectableAdapter<PhotoGridAdapter.PhotoVi
 
     public static class PhotoViewHolder extends RecyclerView.ViewHolder {
         private ImageView ivPhoto;
-        private View vSelected;
-        private View rlSelected;
-        private CheckBox cbSelected;
+        private View mask;
+        private ImageView ivSelected;
 
         public PhotoViewHolder(View itemView) {
             super(itemView);
             ivPhoto = (ImageView) itemView.findViewById(R.id.iv_photo);
-            vSelected = itemView.findViewById(R.id.v_selected);
-            rlSelected = itemView.findViewById(R.id.rl_selected);
-            cbSelected = itemView.findViewById(R.id.cb_selected);
+            mask = itemView.findViewById(R.id.vSelectedMask);
+            ivSelected = itemView.findViewById(R.id.ivSelected);
         }
     }
 

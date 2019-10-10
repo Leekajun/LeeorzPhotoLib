@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.leeorz.photolib.R;
 import com.leeorz.photolib.widget.photopicker.PhotoPickerActivity;
@@ -76,18 +77,18 @@ public class PhotoPickerFragment extends Fragment {
 
 
     RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_photos);
-    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, OrientationHelper.VERTICAL);
+    StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(4, OrientationHelper.VERTICAL);
     layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setAdapter(photoGridAdapter);
     recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-    final Button btSwitchDirectory = (Button) rootView.findViewById(R.id.button);
+    final TextView tvDir = rootView.findViewById(R.id.tvDir);
 
 
     final ListPopupWindow listPopupWindow = new ListPopupWindow(getActivity());
     listPopupWindow.setWidth(ListPopupWindow.MATCH_PARENT);
-    listPopupWindow.setAnchorView(btSwitchDirectory);
+    listPopupWindow.setAnchorView(tvDir);
     listPopupWindow.setAdapter(listAdapter);
     listPopupWindow.setModal(true);
     listPopupWindow.setDropDownGravity(Gravity.BOTTOM);
@@ -99,7 +100,7 @@ public class PhotoPickerFragment extends Fragment {
 
         PhotoDirectory directory = directories.get(position);
 
-        btSwitchDirectory.setText(directory.getName());
+        tvDir.setText(directory.getName());
 
         photoGridAdapter.setCurrentDirectoryIndex(position);
         photoGridAdapter.notifyDataSetChanged();
@@ -133,7 +134,7 @@ public class PhotoPickerFragment extends Fragment {
       }
     });
 
-    btSwitchDirectory.setOnClickListener(new OnClickListener() {
+    rootView.findViewById(R.id.llAllImage).setOnClickListener(new OnClickListener() {
       @Override public void onClick(View v) {
 
         if (listPopupWindow.isShowing()) {
