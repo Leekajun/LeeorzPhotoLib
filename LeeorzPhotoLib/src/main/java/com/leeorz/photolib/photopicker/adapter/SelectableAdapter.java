@@ -1,6 +1,6 @@
 package com.leeorz.photolib.photopicker.adapter;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.leeorz.photolib.photopicker.entity.Photo;
 import com.leeorz.photolib.photopicker.entity.PhotoDirectory;
