@@ -17,6 +17,5 @@
     <string name="crop__wait">PLEASE WAITING…</string>
     <string name="crop__pick_error">ERROR</string>
 
-    <string name="crop__done">DONE</string>
-    <string name="crop__cancel" tools:ignore="ButtonCase">CANCEL</string>
+    <string name="crop__crop">CROP</string>
 </resources>

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.leeorz.photolib.widget.photopicker.widget.TouchImageView
+    <com.leeorz.photolib.photopicker.widget.TouchImageView
         android:id="@+id/iv_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

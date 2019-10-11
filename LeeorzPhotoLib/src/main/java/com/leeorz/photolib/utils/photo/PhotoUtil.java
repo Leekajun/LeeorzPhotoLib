@@ -10,9 +10,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.leeorz.photolib.utils.BitmapUtil;
-import com.leeorz.photolib.widget.crop.Crop;
-import com.leeorz.photolib.widget.photopicker.PhotoPickerActivity;
-import com.leeorz.photolib.widget.photopicker.utils.PhotoPickerIntent;
+import com.leeorz.photolib.crop.Crop;
+import com.leeorz.photolib.photopicker.PhotoPickerActivity;
+import com.leeorz.photolib.photopicker.utils.PhotoPickerIntent;
 
 import java.io.File;
 import java.io.IOException;

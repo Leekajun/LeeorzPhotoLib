@@ -9,8 +9,8 @@
     <application android:allowBackup="true" android:label="@string/app_name"
         android:supportsRtl="true">
 
-        <activity android:name="com.leeorz.photolib.widget.photopicker.PhotoPickerActivity" android:screenOrientation="portrait"/>
-        <activity android:name="com.leeorz.photolib.widget.crop.CropImageActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.leeorz.photolib.photopicker.PhotoPickerActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.leeorz.photolib.crop.CropImageActivity" android:screenOrientation="portrait"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -17,7 +17,7 @@
 
       <fragment
           android:id="@+id/photoPickerFragment"
-          android:name="com.leeorz.photolib.widget.photopicker.fragment.PhotoPickerFragment"
+          android:name="com.leeorz.photolib.photopicker.fragment.PhotoPickerFragment"
           android:layout_width="match_parent"
           android:layout_height="match_parent" />
 
