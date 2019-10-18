@@ -1,9 +1,14 @@
 package com.leeorz.photolib.utils.photo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
 import android.provider.MediaStore;
 import androidx.core.content.FileProvider;
 import android.util.Log;
@@ -74,11 +79,23 @@ public class PhotoUtil {
     public void openCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // 下面这句指定调用相机拍照后的照片存储的路径
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, getUri());
+        Uri fileUri = getUri();
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
         intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, "portrait");
+
+        List<ResolveInfo> resInfoList = mActivity.getPackageManager()
+                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        for (ResolveInfo resolveInfo : resInfoList) {
+            String packageName = resolveInfo.activityInfo.packageName;
+            mActivity.grantUriPermission(packageName, fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        }
+
         intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         mActivity.startActivityForResult(intent, CAMERA);
     }
+
 
     public void setOnDealImageListener(OnDealImageListener onDealImageListener) {
         this.onDealImageListener = onDealImageListener;
@@ -150,9 +167,15 @@ public class PhotoUtil {
 
     private void beginCrop(String path) {
 
-//        File crop = new File(mActivity.getFilesDir(),path);
         File file = new File(getRealFilePath(path));
-        Uri source =  FileProvider.getUriForFile(mActivity,FILE_PROVIDER,file);
+        Uri source = null;
+        Log.e("Build.VERSION.SDK_INT","Build.VERSION.SDK_INT:" + Build.VERSION.SDK_INT);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+            source =  FileProvider.getUriForFile(mActivity,FILE_PROVIDER,file);
+        } else {
+//            24版本以下的直接获取Uri即可
+            source = Uri.fromFile(file);
+        }
 
         File outputPath = new File(mActivity.getFilesDir(), "images/");
         if(!outputPath.exists()){
@@ -166,7 +189,13 @@ public class PhotoUtil {
             e.printStackTrace();
         }
         outputImagePath = output.getAbsolutePath();
-        Uri destination = FileProvider.getUriForFile(mActivity,FILE_PROVIDER,output);
+        Uri destination = null;
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {
+            destination = FileProvider.getUriForFile(mActivity,FILE_PROVIDER,output);
+
+        }else{
+            destination = Uri.fromFile(output);
+        }
 
         Crop crop = Crop.of(source, destination);
         crop.withMaxSize(maxWidth, maxHeight);

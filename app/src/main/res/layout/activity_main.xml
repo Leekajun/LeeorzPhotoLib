@@ -25,6 +25,5 @@
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/abc_ic_ab_back_material" />
+        android:layout_height="match_parent" />
 </LinearLayout>
