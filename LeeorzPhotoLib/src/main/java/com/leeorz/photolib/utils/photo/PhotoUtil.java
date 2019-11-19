@@ -45,9 +45,12 @@ public class PhotoUtil {
     private int maxHeight = 500;
     private OnDealImageListener onDealImageListener;
 
-    public PhotoUtil(Activity activity,String applicationId) {
+    public static void init(String applicationId){
+        FILE_PROVIDER = applicationId + ".fileprovider";
+    }
+
+    public PhotoUtil(Activity activity) {
         this.mActivity = activity;
-        this.FILE_PROVIDER = applicationId + ".fileprovider";
     }
 
     public PhotoUtil setCrop(boolean isCrop) {
