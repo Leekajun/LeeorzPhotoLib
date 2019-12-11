@@ -127,11 +127,11 @@ public class PhotoUtil {
         if (resultCode != Activity.RESULT_OK) return;
 
         if (requestCode == CAMERA) {
+            imagePath = BitmapUtil.ratingImageAndSave(getRealFilePath(imagePath));
             if (isCrop) {
                 beginCrop(imagePath);
             } else {
                 if (onDealImageListener != null) {
-                    imagePath = BitmapUtil.ratingImageAndSave(imagePath);
                     int[] arr = getImageWidthAndHeight(imagePath);
                     onDealImageListener.onDealSingleImageComplete(getImage(getRealFilePath(imagePath), arr[0], arr[1]));
                 }
