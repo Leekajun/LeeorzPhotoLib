@@ -5,13 +5,13 @@
     <string name="images">IMAGE</string>
     <string name="delete">DELETE</string>
     <string name="done">DONE</string>
-    <string name="done_with_count">DONE(%1$d/%2$d)</string>
+    <string name="done_with_count">DONE(%1$s/%2$s)</string>
     <string name="image_index">%1$d/%2$d</string>
     <string name="confirm_to_delete">confirm delete？</string>
     <string name="yes">YES</string>
     <string name="cancel">CANCEL</string>
     <string name="all_image">ALL IMAGE</string>
-    <string name="over_max_count_tips">You can choose at most %1$d picture</string>
+    <string name="over_max_count_tips">You can choose at most %1$s picture</string>
 
     <string name="crop__saving">SAVING…</string>
     <string name="crop__wait">PLEASE WAITING…</string>

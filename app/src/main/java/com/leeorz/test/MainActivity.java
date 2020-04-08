@@ -34,7 +34,7 @@ public class MainActivity extends BaseActivity implements OnDealImageListener {
         findViewById(R.id.btnOpenAlbum).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                photoUtil.openAlbum(1);
+                photoUtil.openAlbum(9);
             }
         });
 

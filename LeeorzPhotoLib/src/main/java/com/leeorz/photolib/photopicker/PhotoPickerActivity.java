@@ -75,11 +75,11 @@ public class PhotoPickerActivity extends AppCompatActivity implements ImagePager
         tvDone.setEnabled(total > 0);
 
         if (total > maxCount) {
-          Toast.makeText(getActivity(), getString(R.string.over_max_count_tips, maxCount),
+          Toast.makeText(getActivity(), getString(R.string.over_max_count_tips, String.valueOf(maxCount)),
               LENGTH_LONG).show();
           return false;
         }
-        tvDone.setText(getString(R.string.done_with_count, total, maxCount));
+        tvDone.setText(getString(R.string.done_with_count, String.valueOf(total), String.valueOf(maxCount)));
         return true;
       }
     });
