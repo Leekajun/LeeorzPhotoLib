@@ -1,14 +1,12 @@
 package com.leeorz.photolib.utils.photo;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.provider.MediaStore;
 import androidx.core.content.FileProvider;
 import android.util.Log;
@@ -51,6 +49,18 @@ public class PhotoUtil {
 
     public PhotoUtil(Activity activity) {
         this.mActivity = activity;
+    }
+
+    /**
+     * 是否是处理图片
+     * @param requestCode
+     * @return
+     */
+    public static boolean isHandleImage(int requestCode){
+        return requestCode == ALBUM
+                || requestCode == CAMERA
+                || requestCode == Crop.REQUEST_CROP
+                || requestCode == Crop.REQUEST_PICK;
     }
 
     public PhotoUtil setCrop(boolean isCrop) {
