@@ -289,7 +289,6 @@ public class PhotoUtil {
     private int[] getImageWidthAndHeight(String imagePath) {
 
         imagePath = getRealFilePath(imagePath);
-        Log.e("getImageWidthAndHeight","imagePath:" + imagePath);
 
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inJustDecodeBounds = true;
