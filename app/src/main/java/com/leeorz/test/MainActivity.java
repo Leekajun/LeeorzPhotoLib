@@ -7,16 +7,16 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.leeorz.lib.base.BaseActivity;
-import com.leeorz.photolib.utils.photo.OnDealImageListener;
-import com.leeorz.photolib.utils.photo.Photo;
-import com.leeorz.photolib.utils.photo.PhotoUtil;
+import com.leeorz.photolib.util.photo.OnDealImageListener;
+import com.leeorz.photolib.util.photo.Photo;
+import com.leeorz.photolib.util.photo.PhotoUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class MainActivity extends BaseActivity implements OnDealImageListener {
 
-    private PhotoUtil photoUtil;
+    private PhotoUtils photoUtil;
     private ImageView ivImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +24,8 @@ public class MainActivity extends BaseActivity implements OnDealImageListener {
         setContentView(R.layout.activity_main);
 
 
-        PhotoUtil.init(BuildConfig.APPLICATION_ID);
-        photoUtil = new PhotoUtil(getActivity());
+        PhotoUtils.init(BuildConfig.APPLICATION_ID);
+        photoUtil = new PhotoUtils(getActivity());
         photoUtil.setCrop(true);
         photoUtil.setOnDealImageListener(this);
 

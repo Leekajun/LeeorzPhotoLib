@@ -1,4 +1,4 @@
-package com.leeorz.photolib.utils.photo;
+package com.leeorz.photolib.util.photo;
 
 /**
  * author: leeorz

@@ -133,7 +133,7 @@ public class CropImageActivity extends MonitoredActivity {
 
         sourceUri = intent.getData();
         if (sourceUri != null) {
-            exifRotation = CropUtil.getExifRotation(CropUtil.getFromMediaUri(this, getContentResolver(), sourceUri));
+            exifRotation = CropUtils.getExifRotation(CropUtils.getFromMediaUri(this, getContentResolver(), sourceUri));
 
             InputStream is = null;
             try {
@@ -149,7 +149,7 @@ public class CropImageActivity extends MonitoredActivity {
                 CropLog.e("OOM reading image: " + e.getMessage(), e);
                 setResultException(e);
             } finally {
-                CropUtil.closeSilently(is);
+                CropUtils.closeSilently(is);
             }
         }
     }
@@ -162,7 +162,7 @@ public class CropImageActivity extends MonitoredActivity {
             is = getContentResolver().openInputStream(bitmapUri);
             BitmapFactory.decodeStream(is, null, options); // Just get image size
         } finally {
-            CropUtil.closeSilently(is);
+            CropUtils.closeSilently(is);
         }
 
         int maxSize = getMaxImageSize();
@@ -194,7 +194,7 @@ public class CropImageActivity extends MonitoredActivity {
             return;
         }
         imageView.setImageRotateBitmapResetBase(rotateBitmap, true);
-        CropUtil.startBackgroundJob(this, null, getResources().getString(R.string.crop__wait),
+        CropUtils.startBackgroundJob(this, null, getResources().getString(R.string.crop__wait),
                 new Runnable() {
                     public void run() {
                         final CountDownLatch latch = new CountDownLatch(1);
@@ -308,7 +308,7 @@ public class CropImageActivity extends MonitoredActivity {
     private void saveImage(Bitmap croppedImage) {
         if (croppedImage != null) {
             final Bitmap b = croppedImage;
-            CropUtil.startBackgroundJob(this, null, getResources().getString(R.string.crop__saving),
+            CropUtils.startBackgroundJob(this, null, getResources().getString(R.string.crop__saving),
                     new Runnable() {
                         public void run() {
                             saveOutput(b);
@@ -365,7 +365,7 @@ public class CropImageActivity extends MonitoredActivity {
             CropLog.e("OOM cropping image: " + e.getMessage(), e);
             setResultException(e);
         } finally {
-            CropUtil.closeSilently(is);
+            CropUtils.closeSilently(is);
         }
         return croppedImage;
     }
@@ -390,12 +390,12 @@ public class CropImageActivity extends MonitoredActivity {
                 setResultException(e);
                 CropLog.e("Cannot open file: " + saveUri, e);
             } finally {
-                CropUtil.closeSilently(outputStream);
+                CropUtils.closeSilently(outputStream);
             }
 
-            CropUtil.copyExifRotation(
-                    CropUtil.getFromMediaUri(this, getContentResolver(), sourceUri),
-                    CropUtil.getFromMediaUri(this, getContentResolver(), saveUri)
+            CropUtils.copyExifRotation(
+                    CropUtils.getFromMediaUri(this, getContentResolver(), sourceUri),
+                    CropUtils.getFromMediaUri(this, getContentResolver(), saveUri)
             );
 
             setResultUri(saveUri);

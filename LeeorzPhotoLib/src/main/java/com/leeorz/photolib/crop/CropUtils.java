@@ -38,7 +38,7 @@ import java.io.IOException;
 /*
  * Modified from original in AOSP.
  */
-class CropUtil {
+class CropUtils {
 
     private static final String SCHEME_FILE = "file";
     private static final String SCHEME_CONTENT = "content";

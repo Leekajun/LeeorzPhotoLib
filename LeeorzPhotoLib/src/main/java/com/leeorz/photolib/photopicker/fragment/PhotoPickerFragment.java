@@ -23,8 +23,8 @@ import com.leeorz.photolib.photopicker.adapter.PopupDirectoryListAdapter;
 import com.leeorz.photolib.photopicker.entity.Photo;
 import com.leeorz.photolib.photopicker.entity.PhotoDirectory;
 import com.leeorz.photolib.photopicker.event.OnPhotoClickListener;
-import com.leeorz.photolib.photopicker.utils.ImageCaptureManager;
-import com.leeorz.photolib.photopicker.utils.MediaStoreHelper;
+import com.leeorz.photolib.photopicker.util.ImageCaptureManager;
+import com.leeorz.photolib.photopicker.util.MediaStoreHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;

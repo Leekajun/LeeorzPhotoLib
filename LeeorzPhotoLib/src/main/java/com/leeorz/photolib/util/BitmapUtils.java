@@ -1,8 +1,7 @@
-package com.leeorz.photolib.utils;
+package com.leeorz.photolib.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -20,9 +19,6 @@ import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -40,7 +36,7 @@ import java.nio.channels.FileChannel;
 /**
  * bitmap帮助类
  */
-public class BitmapUtil {
+public class BitmapUtils {
 
     private final static int DES_WIDTH = 50;
 

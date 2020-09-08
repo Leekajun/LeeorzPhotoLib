@@ -1,4 +1,4 @@
-package com.leeorz.photolib.utils.photo;
+package com.leeorz.photolib.util.photo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,10 +12,10 @@ import androidx.core.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.leeorz.photolib.utils.BitmapUtil;
+import com.leeorz.photolib.util.BitmapUtils;
 import com.leeorz.photolib.crop.Crop;
 import com.leeorz.photolib.photopicker.PhotoPickerActivity;
-import com.leeorz.photolib.photopicker.utils.PhotoPickerIntent;
+import com.leeorz.photolib.photopicker.util.PhotoPickerIntent;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import java.util.List;
  * 图片工具
  * Created by 嘉俊 on 2015/10/9.
  */
-public class PhotoUtil {
+public class PhotoUtils {
     private static String FILE_PROVIDER = "";
     public static final int CAMERA = 10001;
     public static final int ALBUM = 10002;
@@ -47,7 +47,7 @@ public class PhotoUtil {
         FILE_PROVIDER = applicationId + ".fileprovider";
     }
 
-    public PhotoUtil(Activity activity) {
+    public PhotoUtils(Activity activity) {
         this.mActivity = activity;
     }
 
@@ -63,24 +63,24 @@ public class PhotoUtil {
                 || requestCode == Crop.REQUEST_PICK;
     }
 
-    public PhotoUtil setCrop(boolean isCrop) {
+    public PhotoUtils setCrop(boolean isCrop) {
         this.isCrop = isCrop;
         return this;
     }
 
-    public PhotoUtil setFreeCrop(boolean freeCrop) {
+    public PhotoUtils setFreeCrop(boolean freeCrop) {
         this.isFreeCrop = freeCrop;
         this.isCrop = freeCrop;
         return this;
     }
 
-    public PhotoUtil setMaxSize(int maxWidth,int maxHeight){
+    public PhotoUtils setMaxSize(int maxWidth, int maxHeight){
         this.maxWidth = maxWidth;
         this.maxHeight = maxHeight;
         return this;
     }
 
-    public PhotoUtil setCropAspect(int aspectX,int aspectY) {
+    public PhotoUtils setCropAspect(int aspectX, int aspectY) {
         this.aspectX = aspectX;
         this.aspectY = aspectY;
         return this;
@@ -137,7 +137,7 @@ public class PhotoUtil {
         if (resultCode != Activity.RESULT_OK) return;
 
         if (requestCode == CAMERA) {
-            imagePath = BitmapUtil.ratingImageAndSave(getRealFilePath(imagePath));
+            imagePath = BitmapUtils.ratingImageAndSave(getRealFilePath(imagePath));
             if (isCrop) {
                 beginCrop(imagePath);
             } else {
@@ -294,7 +294,7 @@ public class PhotoUtil {
         opts.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(imagePath, opts);
 
-        boolean rotate = BitmapUtil.isPictureRotate(imagePath);
+        boolean rotate = BitmapUtils.isPictureRotate(imagePath);
         int width = rotate ? opts.outHeight : opts.outWidth;
         int height = rotate ? opts.outWidth : opts.outHeight;
 

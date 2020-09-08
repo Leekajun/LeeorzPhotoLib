@@ -1,4 +1,4 @@
-package com.leeorz.photolib.photopicker.utils;
+package com.leeorz.photolib.photopicker.util;
 
 import android.content.Context;
 import android.database.Cursor;
