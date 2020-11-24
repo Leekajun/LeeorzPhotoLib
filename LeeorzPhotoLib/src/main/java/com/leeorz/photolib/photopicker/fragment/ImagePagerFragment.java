@@ -157,7 +157,7 @@ public class ImagePagerFragment extends Fragment {
     }
 
 
-    mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+    mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
       @Override
       public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

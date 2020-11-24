@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/LeeorzPhotoLib.iml" group="LeeorzPhotoLib" />
-      <module fileurl="file://$PROJECT_DIR$/LeeorzPhotoLib/LeeorzPhotoLib-LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/LeeorzPhotoLib/LeeorzPhotoLib-LeeorzPhotoLib.iml" group="LeeorzPhotoLib/LeeorzPhotoLib" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="LeeorzPhotoLib/app" />
-      <module fileurl="file://$PROJECT_DIR$/git-LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/git-LeeorzPhotoLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/LeeorzPhotoLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LeeorzPhotoLib/LeeorzPhotoLib.LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/.idea/modules/LeeorzPhotoLib/LeeorzPhotoLib.LeeorzPhotoLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LeeorzPhotoLib.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LeeorzPhotoLib.app.iml" />
     </modules>
   </component>
 </project>

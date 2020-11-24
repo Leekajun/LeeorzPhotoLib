@@ -88,6 +88,7 @@ public class PopupDirectoryListAdapter extends BaseAdapter {
       }
       Glide.with(context)
               .load(uri)
+              .error(R.drawable.ic_broken_image)
               .centerCrop()
               .thumbnail(0.3f)
               .into(ivCover);

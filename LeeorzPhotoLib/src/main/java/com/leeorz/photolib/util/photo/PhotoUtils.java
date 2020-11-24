@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  * 图片工具
- * Created by 嘉俊 on 2015/10/9.
+ * Created by leeorz on 2015/10/9.
  */
 public class PhotoUtils {
     private static String FILE_PROVIDER = "";
@@ -219,7 +219,7 @@ public class PhotoUtils {
     }
 
     private void handleCrop(int resultCode, Intent result) {
-        if (resultCode == mActivity.RESULT_OK && result != null) {
+        if (resultCode == Activity.RESULT_OK && result != null) {
             if (onDealImageListener != null) {
                 Crop.getOutput(result).getPath();
 //                BitmapUtil.ratingImageAndSave(getRealFilePath(outputImagePath));

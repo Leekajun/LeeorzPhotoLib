@@ -55,21 +55,17 @@ public class PhotoPagerActivity extends AppCompatActivity {
         }
 
 
-        pagerFragment.getViewPager().setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        pagerFragment.getViewPager().addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 updateActionBarTitle();
             }
 
             @Override
-            public void onPageSelected(int i) {
-
-            }
+            public void onPageSelected(int i) { }
 
             @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
+            public void onPageScrollStateChanged(int i) { }
         });
 
     }
@@ -107,9 +103,6 @@ public class PhotoPagerActivity extends AppCompatActivity {
 
             final String deletedPath = pagerFragment.getPaths().get(index);
 
-//      Snackbar snackbar = Snackbar.make(pagerFragment.getView(), R.string.deleted_a_photo,
-//          Snackbar.LENGTH_LONG);
-
             if (pagerFragment.getPaths().size() <= 1) {
 
                 // show confirm dialog
@@ -132,26 +125,9 @@ public class PhotoPagerActivity extends AppCompatActivity {
                         .show();
 
             } else {
-
-//        snackbar.show();
-
                 pagerFragment.getPaths().remove(index);
-                //pagerFragment.getViewPager().removeViewAt(index);
                 pagerFragment.getViewPager().getAdapter().notifyDataSetChanged();
             }
-
-//      snackbar.setAction(R.string.undo, new View.OnClickListener() {
-//        @Override public void onClick(View view) {
-//          if (pagerFragment.getPaths().size() > 0) {
-//            pagerFragment.getPaths().add(index, deletedPath);
-//          } else {
-//            pagerFragment.getPaths().add(deletedPath);
-//          }
-//          pagerFragment.getViewPager().getAdapter().notifyDataSetChanged();
-//          pagerFragment.getViewPager().setCurrentItem(index, true);
-//        }
-//      });
-
             return true;
         }
 

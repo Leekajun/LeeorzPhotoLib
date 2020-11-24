@@ -10,6 +10,7 @@ import androidx.loader.content.Loader;
 import com.leeorz.photolib.R;
 import com.leeorz.photolib.photopicker.entity.PhotoDirectory;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +63,10 @@ public class MediaStoreHelper {
         String bucketId = data.getString(data.getColumnIndexOrThrow(BUCKET_ID));
         String name = data.getString(data.getColumnIndexOrThrow(BUCKET_DISPLAY_NAME));
         String path = data.getString(data.getColumnIndexOrThrow(DATA));
+
+        if (!new File(path).exists()){
+          continue;
+        }
 
         PhotoDirectory photoDirectory = new PhotoDirectory();
         photoDirectory.setId(bucketId);
