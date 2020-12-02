@@ -20,12 +20,17 @@ public class PhotoDirectory {
 
     PhotoDirectory directory = (PhotoDirectory) o;
 
+    if (id == null)return false;
     if (!id.equals(directory.id)) return false;
+    if (name == null)return false;
     return name.equals(directory.name);
   }
 
   @Override public int hashCode() {
     int result = id.hashCode();
+    if(name == null){
+      return result;
+    }
     result = 31 * result + name.hashCode();
     return result;
   }

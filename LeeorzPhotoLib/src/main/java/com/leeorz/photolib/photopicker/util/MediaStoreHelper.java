@@ -3,6 +3,8 @@ package com.leeorz.photolib.photopicker.util;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.TextUtils;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -65,6 +67,9 @@ public class MediaStoreHelper {
         String path = data.getString(data.getColumnIndexOrThrow(DATA));
 
         if (!new File(path).exists()){
+          continue;
+        }
+        if(TextUtils.isEmpty(name)){
           continue;
         }
 
