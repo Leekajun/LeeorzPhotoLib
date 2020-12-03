@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity implements OnDealImageListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        //初始化
         PhotoUtils.init(BuildConfig.APPLICATION_ID);
         photoUtil = new PhotoUtils(getActivity());
         photoUtil.setCrop(true);
