@@ -11,7 +11,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/LeeorzPhotoLib" />
+            <option value="$PROJECT_DIR$/PhotoLib" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

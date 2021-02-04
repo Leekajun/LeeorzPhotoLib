@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidPhotoLib.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidPhotoLib.iml" group="AndroidPhotoLib" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AndroidPhotoLib-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AndroidPhotoLib-app.iml" group="AndroidPhotoLib/app" />
       <module fileurl="file://$PROJECT_DIR$/LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/LeeorzPhotoLib.iml" group="LeeorzPhotoLib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LeeorzPhotoLib/LeeorzPhotoLib-LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/.idea/modules/LeeorzPhotoLib/LeeorzPhotoLib-LeeorzPhotoLib.iml" group="LeeorzPhotoLib/LeeorzPhotoLib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LeeorzPhotoLib/LeeorzPhotoLib.LeeorzPhotoLib.iml" filepath="$PROJECT_DIR$/.idea/modules/LeeorzPhotoLib/LeeorzPhotoLib.LeeorzPhotoLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/LeeorzPhotoLib.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/LeeorzPhotoLib.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PhotoLib/PhotoLib.iml" filepath="$PROJECT_DIR$/.idea/modules/PhotoLib/PhotoLib.iml" group="AndroidPhotoLib/PhotoLib" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="LeeorzPhotoLib/app" />
     </modules>
   </component>
